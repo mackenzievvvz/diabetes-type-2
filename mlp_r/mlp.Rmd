@@ -3,7 +3,7 @@
 title: "Diabetes Detection Project"
 output: 
   html_notebook: 
-    keep_md: yes
+
 ---
 
 Mackenzie Veazey and Sribindu Sreepada
@@ -138,6 +138,7 @@ recall <- function(tp, fp) {
   return (tp / (tp + fp))
 }
 
+
 cat(sprintf("Recall: %.3f\n", recall(cm_3_numeric[3], cm_3_numeric[6] + cm_3_numeric[9])))
 ```
 
@@ -234,10 +235,9 @@ y_pred <- predict(rf_model, newdata = test_df)
 # confusion matrix
 cm_3_rf <- table(Predicted = y_pred, Actual = test_df$target)
 cm_numeric = as.numeric(cm_3_rf)
-print(conf_mat)
+print(cm_3_rf)
 
 # accuracy + recall
-accuracy <- sum(diag(conf_mat)) / sum(conf_mat)
 cat(sprintf("Accuracy: %.3f", accuracy))
 cat(sprintf("Recall: %.3f\n", recall(cm_numeric[3], cm_numeric[6]+cm_numeric[9])))
 
@@ -265,8 +265,6 @@ ggplot(importance_sorted, aes(x = reorder(Feature, Importance), y = Importance))
 
 
 
-
-
 ### Then the binary class dataset
 ```{r}
 # Combine x feats and y
@@ -284,10 +282,10 @@ y_pred <- predict(rf_model, newdata = test_df)
 # confusion matrix
 cm_2_rf <- table(Predicted = y_pred, Actual = test_df$target)
 cm_numeric = as.numeric(cm_2_rf)
-print(conf_mat)
+print(cm_2_rf)
 
 # accuracy + recall
-accuracy <- sum(diag(conf_mat)) / sum(conf_mat)
+accuracy <- sum(diag(cm_2_rf)) / sum(cm_2_rf)
 cat(sprintf("Accuracy: %.3f", accuracy))
 cat(sprintf("Recall: %.3f\n", recall(cm_numeric[2], cm_numeric[4])))
 
@@ -310,14 +308,6 @@ ggplot(importance_sorted, aes(x = reorder(Feature, Importance), y = Importance))
   theme_minimal()
 
 ```
-
-
-
-
-
-
-
-
 
 
 
